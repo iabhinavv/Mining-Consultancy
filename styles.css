@@ -2702,15 +2702,92 @@
 .nextstep p{margin:0;color:var(--text-2);max-width:34rem;font-size:.95rem}
 .nextstep .hero-cta{margin-top:0}
 
-/* footer nav */
-.fnav{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:1.6rem 2rem;padding:clamp(2.2rem,4vw,3rem) 0;border-bottom:1px solid var(--line)}
-.fnav h3{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;margin:0 0 .9rem}
-.fnav ul{list-style:none;margin:0;padding:0;font-size:.92rem}
-.fnav li{margin:.45rem 0}
-.fnav a{color:var(--text-2);text-decoration:none}
+/* footer nav
+   NOTE: the single-page stylesheet sets `footer .wrap{display:flex}`, which turns
+   .fnav into a flex item and collapses the grid to its min-content width. Reset it
+   to block here so the columns can span the full wrap. */
+footer .wrap{display:block}
+.fnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem 2rem;padding:1.9rem 0 1.5rem;border-bottom:1px solid var(--line)}
+.fnav h3{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-weight:500;margin:0 0 .7rem}
+.fnav ul{list-style:none;margin:0;padding:0;font-size:.86rem}
+.fnav li{margin:.3rem 0}
+.fnav a{color:var(--text-2);text-decoration:none;line-height:1.45;display:inline-block}
 .fnav a:hover{color:var(--yellow)}
-footer .legal{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:space-between;padding-top:1.4rem}
+footer .legal{display:flex;flex-wrap:wrap;gap:.4rem 2rem;justify-content:space-between;padding:1.1rem 0 0;font-size:.8rem;line-height:1.5}
+@media (max-width:860px){
+  .fnav{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.3rem 1.5rem;padding:1.6rem 0 1.2rem}
+  .fnav ul{font-size:.84rem}
+  .fnav h3{margin-bottom:.5rem}
+}
+@media (max-width:560px){
+  /* keep the mobile footer short: two columns, and drop the two article links
+     that are already one tap away via "All insights" */
+  .fnav{gap:1.1rem .9rem}
+  .fnav ul{font-size:.8rem}
+  .fnav .m-hide{display:none}
+  footer .legal{font-size:.75rem;gap:.3rem 1rem}
+}
+@media (max-width:420px){
+  /* small enough that the longest service name sits on one line */
+  .fnav{gap:1rem .7rem}
+  .fnav ul{font-size:.76rem}
+  .fnav a{padding:.4rem 0}
+}
+/* desktop nav links need a 24px target too (the mobile rule already pads them) */
+@media (min-width:901px){
+  .nav-links a{padding:.45rem 0}
+}
+
+/* ---- touch targets ----
+   WCAG 2.2 Target Size (Minimum) asks for 24x24 CSS px on standalone controls.
+   Links inside a sentence are exempt, so only standalone navigation is padded. */
+.brand{min-height:44px}
+.fnav a{padding:.3rem 0}
+.sources li a,.stack-body strong a{display:inline-block;padding:.2rem 0}
+@media (max-width:860px){
+  .fnav a{padding:.45rem 0}
+  .fnav li{margin:.15rem 0}
+  .sources li{margin:.5rem 0}
+  .sources li a{padding:.3rem 0}
+}
 
 /* founder portrait on the about page */
 .portrait-img{width:280px;max-width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:16px;border:1px solid var(--line);float:right;margin:0 0 1.2rem 1.6rem;shape-outside:inset(0 round 16px)}
 @media (max-width:640px){.portrait-img{float:none;width:200px;display:block;margin:0 0 1.4rem}}
+
+/* ============================================================
+   COOKIE CONSENT BANNER
+   ============================================================ */
+.cbar{position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--surface);border-top:1px solid var(--line-strong);box-shadow:0 -18px 40px -24px rgba(0,0,0,.9)}
+.cbar-inner{max-width:var(--wrap);margin:0 auto;padding:1.2rem var(--gut);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.2rem 2.5rem;align-items:center}
+.cbar h2{font-size:1.05rem;margin:0 0 .4rem}
+.cbar p{margin:0;font-size:.88rem;color:var(--text-2);max-width:62ch;line-height:1.5}
+.cbar a{color:var(--yellow)}
+.cbar-opts{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-top:.9rem}
+.cbar-opts label{display:flex;align-items:center;gap:.45rem;font-size:.85rem;color:var(--text);cursor:pointer;min-height:28px}
+.cbar-opts input{width:16px;height:16px;accent-color:var(--yellow);cursor:pointer}
+.cbar-opts input:disabled{cursor:default;opacity:.6}
+.cbar-opts span{color:var(--text-3);font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}
+.cbar-btns{display:flex;flex-direction:column;gap:.5rem;min-width:11rem}
+.cbar-btns .btn{width:100%;padding:.7rem 1.1rem;font-size:.9rem}
+@media (max-width:860px){
+  .cbar-inner{grid-template-columns:minmax(0,1fr);gap:1rem;padding:1.1rem var(--gut) 1.2rem}
+  .cbar-btns{flex-direction:row;flex-wrap:wrap;min-width:0}
+  .cbar-btns .btn{flex:1 1 8rem;width:auto}
+  .cbar{max-height:85vh;overflow-y:auto}
+}
+/* the sticky call bar must not sit on top of the consent dialog */
+html:not([data-consent]) .mbar{display:none}
+
+/* footer legal links row */
+.flinks{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;list-style:none;margin:0;padding:1.1rem 0 0;font-size:.82rem;border-top:0}
+.flinks a{color:var(--text-2);text-decoration:none;padding:.35rem 0;display:inline-block}
+.flinks a:hover{color:var(--yellow)}
+footer .legal{padding-top:.6rem}
+@media (max-width:560px){.flinks{gap:.3rem 1.2rem;font-size:.8rem}}
+
+/* `.btn-line` on a <button> was picking up the browser's default button
+   background (buttonface grey). Every other .btn on the site is an <a>, which
+   is transparent by default, so this only showed on the consent dialog. */
+.btn-line{background:transparent}
+button.btn{font-family:var(--f-body);-webkit-appearance:none;appearance:none}

@@ -47,5 +47,16 @@ access required.
   Covers the Mineral and Petroleum Resources Royalty Act formulas, capped at 5% for
   refined and 7% for unrefined mineral resources with a 0.5% floor.
 
+## Legal
+- Privacy and cookie policy: /privacy.html
+- Terms of use: /terms.html
+
+Analytics and advertising tags (Google, Meta pixel) load only after the visitor
+consents via the site's cookie banner; Google Consent Mode v2 defaults are set to
+denied. Visitors can change or withdraw consent from the Cookie settings link in
+the footer of every page.
+
 Note: figures shown in the dashboard illustration on the home page are sample data,
-not client results. Amrev publishes no client names, logos or testimonials.
+not client results. Amrev publishes no client names, logos or testimonials. The site
+content is general information for finance professionals, not tax, legal or
+financial advice, and no client relationship arises from reading it.
